@@ -50,7 +50,7 @@ load_image() {
     echo "Image cms15m:v1_0 not found. Loading image..."
     
     # Load the image from the tar file
-    sudo docker load -i cms15m-v1_0.tar
+    sudo docker pull csm15m/v_1.0:v1.0
     
     if [ $? -eq 0 ]; then
       echo "Image cms15m:v1_0 loaded successfully."

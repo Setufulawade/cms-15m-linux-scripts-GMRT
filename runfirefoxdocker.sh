@@ -1,4 +1,4 @@
-#version 1.0 date-21-6-2024
+#version 1.1 date-24-6-2024
 
 #This script will check if the docker daemon is running. If it is docker daemon is running it will redirect to cmsfirefox.sh
 #if the docker daemon is not running it will redirect to packageschecker.sh

@@ -1,4 +1,4 @@
-#version 1.1 date-24-6-2024
+#version 1.1 date-25-6-2024
 
 #This script will check if the docker daemon is running. If it is docker daemon is running it will redirect to cmsfirefox.sh
 #if the docker daemon is not running it will redirect to packageschecker.sh
@@ -49,7 +49,7 @@ load_image() {
   if ! sudo docker images | grep -q 'csm15m/v_1.0.*v1.0'; then
     echo "Image cms15m:v1_0 not found. Loading image..."
     
-    # Load the image from the tar file
+    # pull the image from the docker hub
     sudo docker pull csm15m/v_1.0:v1.0
     
     if [ $? -eq 0 ]; then

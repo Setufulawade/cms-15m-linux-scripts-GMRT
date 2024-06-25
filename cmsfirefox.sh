@@ -8,7 +8,7 @@
 xhost +local:docker
 
 #terminate pervoious containers.
-docker stop $(docker ps -a | grep 'cms15m:v1_0' | awk '{print $1}')
+docker stop $(docker ps -a | grep 'csm15m/v_1.0:v1.0' | awk '{print $1}')
 
 #Runs the docker container in display enivronment
-sudo docker run -it     --env="DISPLAY"     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw"     cms15m:v1_0 firefox
+sudo docker run -it     --env="DISPLAY"     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw"     csm15m/v_1.0:v1.0 firefox

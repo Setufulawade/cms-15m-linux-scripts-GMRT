@@ -1,119 +1,75 @@
-#version 1.0 date-21-6-2024, Setu Fulwade/JPK $
+#version 1.1 date-25-6-2024, Setu Fulwade/JPK $
 
 ##This script will donwload docker and load the docker image for apt package manager.
 
 #!/bin/bash
 
-echo "installing docker"
+echo "Installing Docker"
 
-#Add Docker's official GPG key:
+# Update the apt package index
 sudo apt-get update
-sudo apt-get install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+if [ $? -ne 0 ]; then
+    echo "Installation failed at apt-get update."
+    exit 1
+fi
 
-# Add the repository to Apt sources:
+# Install required packages for Docker installation
+sudo apt-get install -y ca-certificates curl
+if [ $? -ne 0 ]; then
+    echo "Installation failed at installing ca-certificates and curl."
+    exit 1
+fi
+
+# Create the directory for apt keyrings
+sudo install -m 0755 -d /etc/apt/keyrings
+if [ $? -ne 0 ]; then
+    echo "Installation failed at creating /etc/apt/keyrings directory."
+    exit 1
+fi
+
+# Download Docker's official GPG key
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+if [ $? -ne 0 ]; then
+    echo "Installation failed at downloading Docker's GPG key."
+    exit 1
+fi
+
+# Set the appropriate permissions for the GPG key
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+if [ $? -ne 0 ]; then
+    echo "Installation failed at setting permissions for Docker's GPG key."
+    exit 1
+fi
+
+# Add Docker repository to apt sources
 echo \
 "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
 $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
 sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+if [ $? -ne 0 ]; then
+    echo "Installation failed at adding Docker repository to apt sources."
+    exit 1
+fi
+
+# Update the apt package index again
 sudo apt-get update
+if [ $? -ne 0 ]; then
+    echo "Installation failed at apt-get update after adding Docker repository."
+    exit 1
+fi
 
-#Install Docker Engine, containerd, and Docker Compose:
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# Install Docker Engine, containerd, and Docker Compose
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+if [ $? -ne 0 ]; then
+    echo "Installation failed at installing Docker."
+    exit 1
+fi
 
+echo "Docker installed successfully."
 
-#redirect to docker_status.sh
+# Redirect to docker_status.sh
 ./runfirefoxdocker.sh
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# if command -v docker &> /dev/null
-# then
-
-#     echo "docker is already installed"
-#     sudo systemctl restart docker
-#     // docker -- image search message
-#     // Load
-#     // check load 
-#     exit 0 
-
-#     exit 1
-
-# else
-
-#     echo "docker is not installed installing docker"
-
-    
-#     # Add Docker's official GPG key:
-#     sudo apt-get update
-#     sudo apt-get install ca-certificates curl
-#     sudo install -m 0755 -d /etc/apt/keyrings
-#     sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-#     sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-#     # Add the repository to Apt sources:
-#     echo \
-#     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-#     $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-#     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-#     sudo apt-get update
-
-
-#     #Install Docker Engine, containerd, and Docker Compose:
-#     sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-
-
-#     #runs the docker daemon
-#     sudo systemctl start docker
-#     # Enable Docker to start on boot
-#     sudo systemctl enable docker
-
-#     echo "installing docker image"
-#     #sudo docker pull csm15m/fire:latest
-#     // docker -- image search message
-#     // Load
-#     // check load 
-#     exit 0
-# fi
-
-# sudo systemctl status docker
-# if [ $? -eq 0 ]
-# then
-# 	echo "Docker is running "
-#        #downloads the docker image which contains the firefox 52.7.3 version along with falsh player
-# 	exit 0
-# else 
-# 	echo "Error : Docker is not Running "
-# 	exit 1
-# fi
-
+if [ $? -ne 0 ]; then
+    echo "Failed to execute runfirefoxdocker.sh"
+    exit 1
+fi

@@ -46,7 +46,7 @@ docker_running_status=$?
 #if docker is running load the docker image from local image tar file.
 load_image() {
   # Check if the Docker image exists
-  if ! docker images | grep -q 'cms15m.*v1_0'; then
+  if ! sudo docker images | grep -q 'csm15m/v_1.0.*v1.0'; then
     echo "Image cms15m:v1_0 not found. Loading image..."
     
     # Load the image from the tar file
@@ -73,6 +73,3 @@ else
     chmod +x packageschecker.sh
     ./packageschecker.sh
 fi
-
-
-

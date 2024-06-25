@@ -8,7 +8,7 @@
 xhost +local:docker
 
 #terminate pervoious containers.
-docker stop $(docker ps -a | grep 'csm15m/v_1.0:v1.0' | awk '{print $1}')
+sudo docker rm $(sudo docker ps -a --filter "ancestor=csm15m/v_1.0:v1.0" --format "{{.ID}}")
 
 #Runs the docker container in display enivronment
 sudo docker run -it     --env="DISPLAY"     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw"     csm15m/v_1.0:v1.0 firefox

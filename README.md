@@ -26,3 +26,4 @@ Description of the script-
 5.yuminstaller.sh - installs docker and installs the docker image present inside the folder then redirects to docker_status.sh
 
 -----------------------------------------------------------------------------------------------------------------------------------
+![Image Alt Text](cms-15m-linux-scripts-GMRT/scriptlogic1.drawio_page-0001.jpg)

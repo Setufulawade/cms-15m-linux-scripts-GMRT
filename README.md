@@ -1,4 +1,6 @@
-[Link Text](#cms-15m-linux-scripts-GMRT/GMRT 15m Project report.docx.pdf)
+# Please check the link below for complete project report
+
+[Project Report](https://github.com/Setufulawade/cms-15m-linux-scripts-GMRT/blob/b062615ccf9ca1e6d839dc68c68716104e20d649/GMRT%2015m%20Project%20report.docx.pdf))
 
 # How to use
 ------------------------------------------------------------------------------------------------------------------------------

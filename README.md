@@ -1,4 +1,4 @@
-[Link Text](cms-15m-linux-scripts-GMRT/GMRT 15m Project report.docx.pdf)
+[Link Text](#cms-15m-linux-scripts-GMRT/GMRT 15m Project report.docx.pdf)
 
 # How to use
 ------------------------------------------------------------------------------------------------------------------------------
